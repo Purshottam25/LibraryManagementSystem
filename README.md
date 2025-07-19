@@ -1,135 +1,123 @@
-# LibraryManagementSystem
+# 📚 Library Management System (Backend - JDBC Project)
 
-## 📌 Overview
-SupplyChainManagementApp is a **Spring Boot** application that manages the supply chain process, including **Customers, Orders, Suppliers, and Products**. It provides an API-based system for managing the relationships between these entities.
+A simple **Library Management System** developed using **Core Java**, **JDBC**, and **MySQL**. This is a backend-only console-based project that demonstrates CRUD (Create, Read, Update, Delete) operations on a library database.
 
-## ⚙️ Technologies Used
-- **Backend**: Java, Spring Boot, Spring MVC, Hibernate, JPA
-- **Database**: PostgreSQL
-- **Frontend**: JSP
-- **Build Tool**: Maven
-- **JSON Processing**: Jackson
-- **API Documentation**: Swagger (Optional)
+Developed by **Purshottam Patel**.
 
-## 🛠 Features
-- **Customer Management**: Add, update, delete, and fetch customer details.
-- **Order Processing**: Create and track orders by customer or tracking number.
-- **Supplier Management**: Manage suppliers providing products.
-- **Product Inventory**: Add and track products linked to suppliers and orders.
+---
 
-## 📂 Project Structure
+## 🛠️ Technologies Used
+
+- **Java (Core Java)**
+- **JDBC (Java Database Connectivity)**
+- **MySQL** (Relational Database Management System)
+
+---
+
+## 🧱 Project Description
+
+This backend system allows basic management of a book inventory using JDBC. The project connects to a **MySQL** database called `Library` and performs operations on a single table named `books`.
+
+You can perform the following operations through the console:
+
+- ✅ Add new book
+- 📖 View all books
+- 📝 Update existing book
+- ❌ Delete book record
+
+Each book record contains the following information:
+
+- `book_id` – Unique identifier
+- `title` – Title of the book
+- `author` – Author's name
+- `publisher` – Publisher's name
+- `year` – Year of publication
+- `available_copies` – Number of copies currently available
+
+---
+
+## 🗃️ Database Setup
+
+1. **Create the database**:
+   ```sql
+   CREATE DATABASE Library;
+   ```
+
+2. **Use the database**:
+   ```sql
+   USE Library;
+   ```
+
+3. **Create the `books` table**:
+   ```sql
+   CREATE TABLE books (
+       book_id INT PRIMARY KEY,
+       title VARCHAR(255),
+       author VARCHAR(255),
+       publisher VARCHAR(255),
+       year INT,
+       available_copies INT
+   );
+   ```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone or Download the Project
+
+You can clone this project using Git or simply download the source code.
+
+```bash
+git clone https://github.com/your-username/library-management-jdbc.git
 ```
-SupplyChainManagementApp/
-│-- src/
-│   ├── main/java/jsp/supplychainmanagementsystem/
-│   │   ├── controller/
-│   │   ├── entity/
-│   │   ├── repository/
-│   │   ├── service/
-│   │   ├── dto/
-│   ├── resources/
-│   │   ├── application.properties
-│   │   ├── schema.sql (optional)
-│   │   ├── data.sql (optional)
-│-- pom.xml
-│-- README.md
+
+### 2. Configure JDBC Driver
+
+- Download the **MySQL Connector/J** (`.jar`) file.
+- Add it to your project’s classpath using your IDE (e.g., IntelliJ, Eclipse) or build system.
+
+### 3. Update Database Credentials
+
+In your Java class (usually in a `DBConnection` or `Main` class), update:
+
+```java
+String url = "jdbc:mysql://localhost:3306/Library";
+String username = "your_mysql_username";
+String password = "your_mysql_password";
 ```
 
-## 🗃 Database Schema
-### Customer Table
-| Column   | Type     | Description            |
-|----------|---------|------------------------|
-| id       | INT     | Primary Key            |
-| name     | VARCHAR | Customer Name          |
-| phone    | BIGINT  | Contact Number         |
-| email    | VARCHAR | Email Address          |
-| address  | TEXT    | Customer Address       |
+### 4. Compile and Run the Project
 
-### Orders Table
-| Column          | Type     | Description                  |
-|----------------|---------|------------------------------|
-| id            | INT     | Primary Key                  |
-| order_date    | DATE    | Order date                   |
-| amount        | DOUBLE  | Total amount                 |
-| tracking_no   | VARCHAR | Unique Tracking Number       |
-| customer_id   | INT     | Foreign Key (Customer)       |
+Use your IDE or terminal to run the project. All operations will be performed via console inputs.
 
-### Supplier Table
-| Column     | Type     | Description            |
-|-----------|---------|------------------------|
-| id        | INT     | Primary Key            |
-| name      | VARCHAR | Supplier Name          |
-| contact   | BIGINT  | Contact Number         |
-| email     | VARCHAR | Email Address          |
-| company   | VARCHAR | Company Name           |
+---
 
-### Product Table
-| Column      | Type     | Description                    |
-|------------|---------|--------------------------------|
-| id         | INT     | Primary Key                    |
-| name       | VARCHAR | Product Name                   |
-| price      | DOUBLE  | Product Price                  |
-| stock_qty  | INT     | Stock Quantity                 |
-| supplier_id| INT     | Foreign Key (Supplier)         |
-| order_id   | INT     | Foreign Key (Order, Nullable)  |
+## ✅ Features
 
-## 🔥 API Endpoints
-### Customer APIs
-- **Create Customer**: `POST /api/customers`
-- **Get Customer By ID**: `GET /api/customers/{id}`
-- **Get All Customers**: `GET /api/customers`
-- **Update Customer**: `PUT /api/customer`
+- Add a new book to the system
+- View all available books
+- Update book details (title, author, year, etc.)
+- Delete a book by ID
 
-### Order APIs
-- **Create Order**: `POST /api/orders`
-- **Get Order By ID**: `GET /api/orders/{id}`
-- **Get Orders By Customer ID**: `GET /api/customers/{id}/orders`
-- **Get Order By Tracking Number**: `GET /api/orders/tracking/{trackingNumber}`
+---
 
-### Supplier APIs
-- **Create Supplier**: `POST /api/suppliers`
-- **Get Supplier By ID**: `GET /api/suppliers/{id}`
--  **Update Supplier**: `PUT /api/supplier`
--  **Delete Supplier By ID**: `DELETE /api/supplier/{id}`
+## 📌 Project Limitations
 
-### Product APIs
-- **Create Product**: `POST /api/products`
-- **Get Product By ID**: `GET /api/products/{id}`
-- **Get Products By Supplier ID**: `GET /api/product/supplier/{id}`
-- **Update Product**: `PUT /api/product`
-- **Delete Product By ID**: `DELETE /api/product/{id}`
+- Backend only – no graphical user interface
+- No user login or role-based access
+- No advanced features like borrowing history, due dates, or search by keyword
 
+---
 
-## ⚡ Running the Application
-### Prerequisites
-- Install **Java 8+**
-- Install **PostgreSQL** and create a database (`supply_chain_db`)
-- Configure `application.properties` with DB details
+## 🙋‍♂️ Author
 
-### Steps to Run
-1. **Clone the repository**
-   ```sh
-   git clone https://github.com/your-repo/SupplyChainManagementApp.git
-   cd SupplyChainManagementApp
-   ```
-2. **Setup Database** (Optional: Import schema.sql & data.sql)
-3. **Build and Run the Application**
-   ```sh
-   mvn clean install
-   mvn spring-boot:run
-   ```
-4. **Access API using Postman or Browser**
-   ```sh
-   http://localhost:8080/api/customers
-   ```
+**Purshottam Patel**
 
-## 🚀 Future Enhancements
-- Implement JWT Authentication
-- Add Role-based Access Control (RBAC)
-- Implement Frontend in Angular/React
+> A passionate Java developer exploring backend development with real-world database applications.
 
-## 🤝 Contributors
-- **Name** – Purshottam Patel
+---
 
-## 📜 License
-This project is licensed under the **Purshottam Patel**.
+## 📃 License
+
+This project is open-source and free to use for educational or non-commercial purposes.
